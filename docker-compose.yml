@@ -1,0 +1,24 @@
+version: "3.8"
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"    
+    networks:
+      - app-tier      
+    environment:
+      MYSQL_DATABASE: supertest_jest_node_learning
+      MYSQL_ALLOW_EMPTY_PASSWORD: ok
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbuser
+      MYSQL_ROOT_HOST: '%'
